@@ -21,11 +21,11 @@ app.get("/", (req: Request, res: Response) => {
 	res.send("application built, deployed and started successfuly !!!");
 });
 
-app.get("/videos/", (req: Request, res: Response) => {
+app.get("/api/videos/", (req: Request, res: Response) => {
 	res.send(videos);
 });
 
-app.get("/videos/:videoId", (req: Request, res: Response) => {
+app.get("/api/videos/:videoId", (req: Request, res: Response) => {
 	const id = +req.params.videoId;
 	const foundVideo = videos.find((vidos) => vidos.id === id);
 	if (!foundVideo) {
@@ -38,23 +38,23 @@ app.get("/videos/:videoId", (req: Request, res: Response) => {
 	}
 });
 
-app.post("/videos", (req: Request, res: Response) => {
+app.post("/api/videos", (req: Request, res: Response) => {
 	const newVideo = {
 		id: +new Date(),
 		title: req.body.title,
 		author: "it-incubator.eu",
 	};
 	videos.push(newVideo);
-	res.send(newVideo);
+	res.status(201).json(videos);
 });
 
-app.delete("/videos/:id", (req: Request, res: Response) => {
+app.delete("/api/videos/:id", (req: Request, res: Response) => {
 	const { id } = req.params;
 	const newVideoList = videos.filter((vidos) => vidos.id !== +id);
 	res.send(newVideoList);
 });
 
-app.put("/videos/:id", (req: Request, res: Response) => {
+app.put("/api/videos/:id", (req: Request, res: Response) => {
 	const { id } = req.params;
 	const { title } = req.body;
 	const newVideoList = videos.map((el) =>
