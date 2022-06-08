@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 const videos = [
 	{ id: 1, title: "About JS - 01", author: "it-incubator.eu" },
@@ -18,7 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req: Request, res: Response) => {
-	res.send("lalala... zazaza ");
+	res.send("application built, deployed and started successfuly");
 });
 
 app.get("/videos/", (req: Request, res: Response) => {
