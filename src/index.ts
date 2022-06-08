@@ -18,7 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/", (req: Request, res: Response) => {
-	res.send("application built, deployed and started successfuly");
+	res.send("application built, deployed and started successfuly !!!");
 });
 
 app.get("/videos/", (req: Request, res: Response) => {
