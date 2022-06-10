@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import videosRouter from "./routes/videosRts";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,52 +18,15 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
+app.use("/videos", videosRouter)
+
 app.get("/", (req: Request, res: Response) => {
 	res.send("application built, deployed and started successfuly !!!");
-});
-
-app.get("/api/videos/", (req: Request, res: Response) => {
-	res.send(videos);
-});
-
-app.get("/api/videos/:videoId", (req: Request, res: Response) => {
-	const id = +req.params.videoId;
-	const foundVideo = videos.find((vidos) => vidos.id === id);
-	if (!foundVideo) {
-		res.status(400).json("No such video");
-	}
-	if (foundVideo) {
-		res.send(
-			`Video name is ${foundVideo.title}, and its author is ${foundVideo.author}`
-		);
-	}
-});
-
-app.post("/api/videos", (req: Request, res: Response) => {
-	const newVideo = {
-		id: +new Date(),
-		title: req.body.title,
-		author: "it-incubator.eu",
-	};
-	videos.push(newVideo);
-	res.status(201).json(videos);
-});
-
-app.delete("/api/videos/:id", (req: Request, res: Response) => {
-	const { id } = req.params;
-	const newVideoList = videos.filter((vidos) => vidos.id !== +id);
-	res.send(newVideoList);
-});
-
-app.put("/api/videos/:id", (req: Request, res: Response) => {
-	const { id } = req.params;
-	const { title } = req.body;
-	const newVideoList = videos.map((el) =>
-		el.id === +id ? { ...el, title } : el
-	);
-	res.send(newVideoList);
 });
 
 app.listen(port, () => {
 	console.log(`Server has started on ${port} port`);
 });
+
+
+// "dev": "nodemon --inspect .\\dist\\index.js",
