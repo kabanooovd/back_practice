@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use("/videos", videosRouter);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("DIMAAAAAASSS !!!");
+  res.send("DIMAAAAAASSS !!! diiiiiiiimas");
 });
 
 app.listen(port, () => {
