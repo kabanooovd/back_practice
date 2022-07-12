@@ -1,6 +1,4 @@
 import {
-  ErrorRequestHandler,
-  NextFunction,
   Request,
   Response,
   Router,
@@ -21,10 +19,7 @@ videosRouter.get("/:videoId", (req: Request, res: Response) => {
     res.status(404).send("Not Found");
   }
   if (foundVideo) {
-    res.send(
-      // `Video name is ${foundVideo.title}, and its author is ${foundVideo.author}`
-      foundVideo
-    );
+    res.send(foundVideo);
   }
 });
 
@@ -50,7 +45,6 @@ videosRouter.delete("/:id", (req: Request, res: Response) => {
   if (!foundId) {
     res.status(404).send();
   }
-  // const newVideoList = videos.filter((vidos) => vidos.id !== +id);
   const foundElement = videos.find((el) => el.id === +id);
   if (foundElement) {
     const currentIndex = videos.indexOf(foundElement);
@@ -60,30 +54,11 @@ videosRouter.delete("/:id", (req: Request, res: Response) => {
   }
 });
 
-// videosRouter.put("/:id", (req: Request, res: Response) => {
-//   const { id } = req.params;
-//   const { title } = req.body;
-//   const foundId = videos.find((item) => +id === item.id);
-//   if (!foundId) {
-//     res.status(404).send("Not Found");
-//   }
-//   if (!title) {
-//     errorHandler(res, 400, "No title", "VIDEOS");
-//   }
-//   if (title.length > 40) {
-//     errorHandler(res, 400, "title has more then 40 characters", "VIDEOS");
-//   }
-//   const newVideoList = videos.forEach((el) =>
-//     el.id === +id ? { ...el, title } : el
-//   );
-//   res.status(204).json(newVideoList);
-// });
-
 videosRouter.put("/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   const { title } = req.body;
-  const foundId = videos.find((item) => +id === item.id);
-  if (!foundId) {
+  const foundItemById = videos.find((item) => +id === item.id);
+  if (!foundItemById) {
     res.status(404).send("Not Found");
   }
   if (!title) {
@@ -93,17 +68,8 @@ videosRouter.put("/:id", (req: Request, res: Response) => {
     errorHandler(res, 400, "title has more then 40 characters", "VIDEOS");
   }
 
-  const foundElement = videos.find((el) => el.id === +id);
-
-  if (foundElement) {
-    const updatedItem = {
-      id: foundElement.id,
-      title: title,
-      author: foundElement.author,
-    };
-    const currentIndex = videos.indexOf(foundElement);
-    videos.splice(currentIndex, currentIndex + 1);
-    videos.push(updatedItem);
+  if (foundItemById) {
+    foundItemById.title = title;
   }
 
   res.status(204).send("KRUTO");
