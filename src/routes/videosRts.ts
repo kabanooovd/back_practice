@@ -50,7 +50,7 @@ videosRouter.delete("/:id", (req: Request, res: Response) => {
     const currentIndex = videos.indexOf(foundElement);
     videos.splice(currentIndex, currentIndex + 1);
     console.log(videos);
-    res.status(204).send("video has been removed");
+    res.status(204).send(videos);
   }
 });
 
@@ -72,7 +72,7 @@ videosRouter.put("/:id", (req: Request, res: Response) => {
     foundItemById.title = title;
   }
 
-  res.status(204).send("KRUTO");
+  res.status(204).send(foundItemById);
 });
 
 export default videosRouter;
