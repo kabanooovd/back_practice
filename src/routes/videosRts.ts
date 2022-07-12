@@ -25,10 +25,10 @@ videosRouter.get("/:videoId", (req: Request, res: Response) => {
 
 videosRouter.post("/", (req: Request, res: Response) => {
   if (!req.body.title) {
-    errorHandler(res, 400, "No title", "VIDEOS");
+    errorHandler(res, 400, "No title", "title");
   }
   if (req.body.title.length > 40) {
-    errorHandler(res, 400, "title has more then 40 characters", "VIDEOS");
+    errorHandler(res, 400, "title has more then 40 characters", "title");
   }
   const newVideo = {
     id: +new Date(),
@@ -62,10 +62,10 @@ videosRouter.put("/:id", (req: Request, res: Response) => {
     res.status(404).send("Not Found");
   }
   if (!title) {
-    errorHandler(res, 400, "No title", "VIDEOS");
+    errorHandler(res, 400, "No title", "title");
   }
   if (title.length > 40) {
-    errorHandler(res, 400, "title has more then 40 characters", "VIDEOS");
+    errorHandler(res, 400, "title has more then 40 characters", "title");
   }
 
   if (foundItemById) {
