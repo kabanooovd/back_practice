@@ -82,8 +82,8 @@ videosRouter.delete("/:id", (req: Request, res: Response) => {
 videosRouter.put("/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   const { title } = req.body;
-  const foundId = videos.find((item) => +id === item.id);
-  if (!foundId) {
+  const foundItemById = videos.find((item) => +id === item.id);
+  if (!foundItemById) {
     res.status(404).send("Not Found");
   }
   if (!title) {
@@ -93,15 +93,13 @@ videosRouter.put("/:id", (req: Request, res: Response) => {
     errorHandler(res, 400, "title has more then 40 characters", "VIDEOS");
   }
 
-  const foundElement = videos.find((el) => el.id === +id);
-
-  if (foundElement) {
+  if (foundItemById) {
     const updatedItem = {
-      id: foundElement.id,
+      id: foundItemById.id,
       title: title,
-      author: foundElement.author,
+      author: foundItemById.author,
     };
-    const currentIndex = videos.indexOf(foundElement);
+    const currentIndex = videos.indexOf(foundItemById);
     videos.splice(currentIndex, currentIndex + 1);
     videos.push(updatedItem);
   }
