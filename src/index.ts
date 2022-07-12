@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use("/videos", videosRouter);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("application built, deployed and started successfuly !!! check");
+  res.send("DIMAAAAAASSS");
 });
 
 app.listen(port, () => {
