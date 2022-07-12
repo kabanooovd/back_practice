@@ -96,14 +96,15 @@ videosRouter.put("/:id", (req: Request, res: Response) => {
   const foundElement = videos.find((el) => el.id === +id);
 
   if (foundElement) {
-    const updatedItem = {
-      id: foundElement.id,
-      title,
-      author: foundElement.author,
-    };
-    const currentIndex = videos.indexOf(foundElement);
-    videos.splice(currentIndex, currentIndex + 1);
-    videos.push(updatedItem);
+    // const updatedItem = {
+    //   id: foundElement.id,
+    //   title,
+    //   author: foundElement.author,
+    // };
+    // const currentIndex = videos.indexOf(foundElement);
+    // videos.splice(currentIndex, currentIndex + 1);
+    // videos.push(updatedItem);
+    foundElement.title = title;
   }
 
   res.status(204).send("KRUTO");
