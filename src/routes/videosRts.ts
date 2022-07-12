@@ -98,7 +98,7 @@ videosRouter.put("/:id", (req: Request, res: Response) => {
   if (foundElement) {
     const updatedItem = {
       id: foundElement.id,
-      title,
+      title: title,
       author: foundElement.author,
     };
     const currentIndex = videos.indexOf(foundElement);
