@@ -1,8 +1,4 @@
-import {
-  Request,
-  Response,
-  Router,
-} from "express";
+import { Request, Response, Router } from "express";
 import { videos } from "../temporaryData";
 import { errorHandler } from "../utils/error-handler";
 

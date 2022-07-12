@@ -13,6 +13,5 @@ export const errorHandler = (
         field,
       },
     ],
-    resultCode: 1,
   });
 };
